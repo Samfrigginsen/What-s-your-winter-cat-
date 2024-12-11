@@ -1,28 +1,97 @@
-/* General Styles */
+
+/* Ensures body content is centered */
 body {
     margin: 0;
     padding: 0;
     font-family: 'Arial', sans-serif;
-    background: #f0f8ff; /* Light winter blue */
+    background: #8db0d1; /* Light winter blue */
     color: #333;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    justify-content: center; /* Center content horizontally */
+    align-items: center; /* Center content vertically */
     height: 100vh;
     overflow: hidden;
     position: relative;
+    text-align: center; /* Ensures text content inside header is centered */
 }
 
-/* Snowflake Styles */
+
+
+/* Custom font for title */
+@font-face {
+    font-family: 'Birloves'; /* Name for the font */
+    src: url('./Birloves.otf') format('opentype'); /* Path to the font file */
+    font-weight: normal;
+    font-style: normal;
+}
+
+h1 {
+    font-family: 'Birloves', sans-serif; /* Use custom font */
+    font-size: 2.5rem;
+    color: #f7f7f7;
+    margin: 0 0 20px 0;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6); /* Stronger shadow for visibility */
+}
+
+h2 {
+    font-size: 2rem;
+    color: #f7f7f7;
+    margin: 0 0 1px 0;
+    padding: 0 20px; /* Adds 20px padding on the left and right */
+}
+
+h3 {
+    font-family: 'Birloves', sans-serif; /* Use custom font */
+    font-size: 2.1rem;
+    color: #f7f7f7;
+    margin: 0 0 20px 0;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6); /* Stronger shadow for visibility */
+}
+
+
+/* Style the description text */
+p {
+    font-size: 1.2rem;
+    color: #e0e0e0;
+    margin: 0 0 30px 0;
+}
+
+/* Style the button */
+button {
+    font-size: 1.2rem;
+    padding: 15px 30px;
+    background-color: #4a6ea8; /* Muted blue for a softer look */
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    width: 90%; /* Ensure all buttons fill the width of their container */
+
+    display: block; /* Makes the button behave like a block element */
+    margin-left: auto; /* Centers the button horizontally */
+    margin-right: auto; /* Centers the button horizontally */
+}
+
+
+button:hover {
+    background-color: #375b88; /* Slightly darker blue on hover */
+    transform: translateY(-5px); /* Hover effect */
+}
+
+button:active {
+    transform: translateY(2px); /* Button press effect */
+}
+
+/* Snowflake container */
 #snow-container {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    pointer-events: none; /* Prevent interaction with snowflakes */
-    z-index: -1; /* Behind the content */
+    pointer-events: none;
+    z-index: 9999;
 }
 
 .snowflake {
@@ -30,27 +99,44 @@ body {
     top: -10px;
     color: white;
     font-size: 1.2rem;
-    opacity: 0.8;
-    animation: fall linear infinite, sway 3s ease-in-out infinite;
+    opacity: 0.9;
+    animation: fall 10s linear infinite, sway 5s ease-in-out infinite, fadeOut 2s 8s forwards;
 }
 
-/* Snowflake Animation */
+/* Snowflake animations */
 @keyframes fall {
     0% {
         transform: translateY(-100px);
-        opacity: 0.8;
     }
     100% {
         transform: translateY(100vh);
+    }
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+    100% {
         opacity: 0;
     }
 }
 
-@keyframes sway {
-    0%, 100% {
-        transform: translateX(0);
-    }
-    50% {
-        transform: translateX(20px);
-    }
+#results-container {
+    margin-top: 200px; /* Add some space at the top */
+    padding-top: 10px; /* Optionally add padding to create some internal space */
+    max-width: 100%; /* Ensure it doesn't exceed screen width */
+    overflow-y: auto; /* Enable vertical scrolling if content exceeds */
+    box-sizing: border-box; /* Ensure padding is accounted for in width */
+}
+
+
+
+button {
+    margin-top: 10px; /* Add some space between buttons */
+    margin-bottom: 10px;
+}
+
+body {
+    overflow-y: auto; /* Allow vertical scrolling */
 }

@@ -4,9 +4,44 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Your Winter Cat!</title>
+    
     <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    
 </head>
 <body>
+    <div id="snow-container"></div>
+
+    <script>
+        const snowContainer = document.getElementById('snow-container');
+
+function createSnowflake() {
+const snowflake = document.createElement('div');
+snowflake.classList.add('snowflake');
+snowflake.textContent = '❄'; // Snowflake symbol
+snowflake.style.left = Math.random() * 100 + 'vw'; // Random horizontal position
+snowflake.style.animationDuration = Math.random() * 7 + 9 + 's'; // Random fall speed
+snowflake.style.fontSize = Math.random() * 1.5 + 1 + 'rem'; // Random size
+snowflake.style.opacity = Math.random(); // Random transparency
+snowContainer.appendChild(snowflake);
+
+// Add smooth fade-out effect before removal
+setTimeout(() => {
+    snowflake.style.transition = 'opacity 2s'; // 2s fade-out duration
+    snowflake.style.opacity = '0'; // Fade out the snowflake
+}, 5000); // Start fading after 5 seconds
+
+// Remove the snowflake after fade-out completes
+setTimeout(() => {
+    snowflake.remove();
+}, 7000); // Remove it 7 seconds after creation
+}
+
+    // Generate snowflakes at intervals
+    setInterval(createSnowflake, 200);
+    
+    </script>
+
     <div id="results-container">
         <h1>Your Winter Cat Is...</h1>
         <div id="cat-result">
@@ -17,7 +52,7 @@
             </p>
         </div>
 
-        <h2>Your Accompanying Cat Is...</h2>
+        <h3>Your Accompanying Cat Is...</h3>
         <div id="accompanying-cat-result">
             <img src="https://placekitten.com/400/301" alt="Your Accompanying Cat" id="accompanying-cat-image">
             <h2 id="accompanying-cat-name">The Aurora Mystic</h2>
@@ -34,6 +69,7 @@
         </div>
 
         <button onclick="restartQuiz()">Take the Quiz Again</button>
+    
     </div>
 
     <script>
@@ -73,16 +109,17 @@
 
         // Online cat images (for demo purposes)
         const catImages = {
-            "The Frostbound Philosopher": "https://placekitten.com/400/300",
-            "The Icy Charmer": "https://placekitten.com/400/301",
-            "The Aurora Mystic": "https://placekitten.com/400/302",
-            "The Snowdrift Sentinel": "https://placekitten.com/400/303",
-            "The Blizzard Trailblazer": "https://placekitten.com/400/304",
-            "The Cozy Hearthkeeper": "https://placekitten.com/400/305",
-            "The Arctic Visionary": "https://placekitten.com/400/306",
-            "The Frosty Rebel": "https://placekitten.com/400/307",
-            "The Midnight Wanderer": "https://placekitten.com/400/308"
-        };
+    "The Frostbound Philosopher": "Cat images/cat1.png",
+    "The Icy Charmer": "Cat images/cat2.png",
+    "The Aurora Mystic": "Cat images/cat3.png",
+    "The Snowdrift Sentinel": "Cat images/cat4.png",
+    "The Blizzard Trailblazer": "Cat images/cat5.png",
+    "The Cozy Hearthkeeper": "Cat images/cat6.png",
+    "The Arctic Visionary": "Cat images/cat7.png",
+    "The Frosty Rebel": "Cat images/cat8.png",
+    "The Midnight Wanderer": "Cat images/cat9.png"
+};
+
 
         // Determine the accompanying cat
         const accompanyingCat = catPairings[mainCat];
