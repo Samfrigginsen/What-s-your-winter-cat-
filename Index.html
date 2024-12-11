@@ -7,40 +7,6 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header>
-        <h1>Welcome to "What's Your Winter Cat?"</h1>
-        <p>Take a fun, cozy quiz to discover your Winter Cat personality!</p>
-        <button onclick="startQuiz()">Start Quiz</button>
-    </header>
-
-    <!-- Snowflake container for dynamic snowflakes -->
-    <div id="snow-container"></div>
-
-    <script>
-        function startQuiz() {
-            window.location.href = 'quiz.html';
-        }
-
-        // Create a dynamic snowfall effect
-        const snowContainer = document.getElementById('snow-container');
-
-        function createSnowflake() {
-            const snowflake = document.createElement('div');
-            snowflake.classList.add('snowflake');
-            snowflake.textContent = '❄'; // Snowflake symbol
-            snowflake.style.left = Math.random() * 100 + 'vw'; // Random horizontal position
-            snowflake.style.animationDuration = Math.random() * 3 + 2 + 's'; // Random fall speed
-            snowflake.style.opacity = Math.random();
-            snowContainer.appendChild(snowflake);
-
-            // Remove the snowflake after animation ends
-            setTimeout(() => {
-                snowflake.remove();
-            }, 5000);
-        }
-
-        // Generate snowflakes at intervals
-        setInterval(createSnowflake, 200);
-    </script>
+ 
 </body>
 </html>
