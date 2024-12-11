@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What's Your Winter Cat? - Quiz</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="quiz-container">
+        <header>
+            <h1>What's Your Winter Cat?</h1>
+            <p>Answer the questions below to find out which Winter Cat matches your personality!</p>
+        </header>
+
+        <div id="question-container">
+            <!-- Questions will appear dynamically -->
+        </div>
+
+        <button id="next-button" onclick="nextQuestion()">Next</button>
+    </div>
+
+    <script>
+        // Quiz Questions and Answers
+        const questions = [
+            "What’s your favorite winter activity?",
+            "What’s your favorite place to be on a snowy day?",
+            "How do you feel about snowstorms?",
+            "What winter drink do you love the most?",
+            "What’s your favorite winter food?",
+            "How do you celebrate winter holidays?",
+            "What do you value most in your winter days?"
+        ];
+
+        const answers = [
+            ["Building snowmen", "Skiing or snowboarding", "Reading indoors", "Exploring snow trails"],
+            ["By the fireplace", "In a bustling café", "On a moonlit walk", "At home with loved ones"],
+            ["Excited and adventurous", "Calm and cozy", "Unbothered and relaxed", "Planning for the aftermath"],
+            ["Hot chocolate", "Coffee", "Tea", "Mulled cider"],
+            ["Warm soup", "Cookies and cakes", "Roasted chestnuts", "Hearty stew"],
+            ["Traditional celebrations", "Quiet introspection", "Socializing with friends", "Adventure or travel"],
+            ["Peace and quiet", "Laughter and connection", "Thrills and spontaneity", "Reflection and planning"]
+        ];
+
+        // Winter Cat Results
+        const results = [
+            "The Frostbound Philosopher",
+            "The Icy Charmer",
+            "The Aurora Mystic",
+            "The Snowdrift Sentinel",
+            "The Blizzard Trailblazer",
+            "The Cozy Hearthkeeper",
+            "The Arctic Visionary",
+            "The Frosty Rebel",
+            "The Midnight Wanderer"
+        ];
+
+        let userAnswers = []; // To store selected answers
+        let currentQuestionIndex = 0;
+
+        const questionContainer = document.getElementById("question-container");
+        const nextButton = document.getElementById("next-button");
+
+        // Function to render the current question
+        function renderQuestion() {
+            questionContainer.innerHTML = ""; // Clear previous content
+
+            // Create and add question text
+            const questionText = document.createElement("h2");
+            questionText.textContent = questions[currentQuestionIndex];
+            questionContainer.appendChild(questionText);
+
+            // Create and add answer options
+            answers[currentQuestionIndex].forEach((answer, index) => {
+                const answerButton = document.createElement("button");
+                answerButton.textContent = answer;
+                answerButton.className = "answer-button";
+                answerButton.onclick = () => selectAnswer(index);
+                questionContainer.appendChild(answerButton);
+            });
+        }
+
+        // Function to handle answer selection
+        function selectAnswer(selectedIndex) {
+            userAnswers[currentQuestionIndex] = selectedIndex; // Save user's answer
+            nextButton.style.display = "block"; // Show "Next" button after selection
+        }
+
+        // Function to show the next question
+        function nextQuestion() {
+            currentQuestionIndex++;
+            if (currentQuestionIndex < questions.length) {
+                renderQuestion(); // Render the next question
+                nextButton.style.display = "none"; // Hide "Next" button until an answer is selected
+            } else {
+                calculateResult(); // All questions answered, calculate the result
+            }
+        }
+
+        // Function to calculate the result and redirect to the results page
+        function calculateResult() {
+            // For simplicity, pick a random Winter Cat result
+            const randomResultIndex = Math.floor(Math.random() * results.length);
+            const selectedCat = results[randomResultIndex];
+
+            // Redirect to the results page with the selected cat in the query parameter
+            window.location.href = `answer.html?cat=${encodeURIComponent(selectedCat)}`;
+        }
+
+        // Initialize the quiz
+        renderQuestion(); // Display the first question
+        nextButton.style.display = "none"; // Hide the "Next" button initially
+    </script>
+</body>
+</html>
