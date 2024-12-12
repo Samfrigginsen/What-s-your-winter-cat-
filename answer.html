@@ -63,9 +63,7 @@ setTimeout(() => {
 
         <div id="social-share">
             <h3>Share your result!</h3>
-            <a id="share-facebook" href="#" target="_blank">Share on Facebook</a>
-            <a id="share-instagram" href="#" target="_blank">Share on Instagram</a>
-            <a id="share-messenger" href="#" target="_blank">Share on Messenger</a>
+            
         </div>
 
         <button onclick="restartQuiz()">Take the Quiz Again</button>
@@ -80,45 +78,57 @@ setTimeout(() => {
 
         // Fetch the "cat" query parameter
         const mainCat = getQueryParameter("cat");
-
-        // Pairings for Winter Cats
-        const catPairings = {
-            "The Frostbound Philosopher": "The Midnight Wanderer",
-            "The Icy Charmer": "The Cozy Hearthkeeper",
-            "The Aurora Mystic": "The Frosty Rebel",
-            "The Snowdrift Sentinel": "The Arctic Visionary",
-            "The Blizzard Trailblazer": "The Icy Charmer",
-            "The Cozy Hearthkeeper": "The Aurora Mystic",
-            "The Arctic Visionary": "The Snowdrift Sentinel",
-            "The Frosty Rebel": "The Blizzard Trailblazer",
-            "The Midnight Wanderer": "The Frostbound Philosopher"
-        };
-
-        // Descriptions for each Winter Cat
-        const catDescriptions = {
-            "The Frostbound Philosopher": "Introspective, reflective, and contemplative. You love solitude and quiet moments in the snow.",
-            "The Icy Charmer": "Sociable, charismatic, and thrives in group settings during winter celebrations.",
-            "The Aurora Mystic": "Dreamy, creative, and imaginative with a touch of winter magic.",
-            "The Snowdrift Sentinel": "Loyal, protective, and always keeping things in order.",
-            "The Blizzard Trailblazer": "Adventurous, daring, and always seeking new winter thrills.",
-            "The Cozy Hearthkeeper": "Warm, nurturing, and loves tradition and comfort by the fire.",
-            "The Arctic Visionary": "Strategic, logical, and always thinking ahead to the future.",
-            "The Frosty Rebel": "Free-spirited, playful, and unpredictable, embracing spontaneity in winter.",
-            "The Midnight Wanderer": "Mysterious, calm, and prefers moonlit snowfields over noisy days."
-        };
-
-        // Online cat images (for demo purposes)
-        const catImages = {
-    "The Frostbound Philosopher": "Cat images/cat1.png",
-    "The Icy Charmer": "Cat images/cat2.png",
-    "The Aurora Mystic": "Cat images/cat3.png",
-    "The Snowdrift Sentinel": "Cat images/cat4.png",
-    "The Blizzard Trailblazer": "Cat images/cat5.png",
-    "The Cozy Hearthkeeper": "Cat images/cat6.png",
-    "The Arctic Visionary": "Cat images/cat7.png",
-    "The Frosty Rebel": "Cat images/cat8.png",
-    "The Midnight Wanderer": "Cat images/cat9.png"
+// Pairings for Winter Cats
+const catPairings = {
+    "The Philosopher Cat": "The Midnight Caracal",  
+    "The Lynx": "The Cozy Snowcat", 
+    "The Aurora Cat": "The Wildcat",  
+    "The White Witch Cat": "The Winter Howler", 
+    "The Winter Howler": "The White Witch Cat",  
+    "The Cozy Snowcat": "The Aurora Cat", 
+    "The Arctic Panther": "The Lynx", 
+    "The Wildcat": "The Winter Howler",  
+    "The Midnight Caracal": "The Philosopher Cat"  
 };
+
+// Descriptions for each Winter Cat
+const catDescriptions = {
+    "The Philosopher Cat": "Introspective, reflective, and contemplative. You love solitude and quiet moments in the snow.",
+    "The Lynx": "Adventurous, resourceful, and independent, seeking freedom and exploration in the winter wilderness.",
+    "The Aurora Cat": "Dreamy, creative, and imaginative, with a touch of winter magic that sparks your spirit.",
+    "The White Witch Cat": "Mysterious and wise, blending mystical energy with winter’s quiet beauty.",
+    "The Winter Howler": "Bold, energetic, and spontaneous, embracing the cold with an untamed spirit.",
+    "The Cozy Snowcat": "Warm, nurturing, and tradition-loving, always seeking comfort by the fire on snowy days.",
+    "The Arctic Panther": "Strategic, independent, and determined, with an unwavering focus on future goals.",
+    "The Wildcat": "Innovative, bold, and loves challenges, pushing boundaries in the winter wilds.",
+    "The Midnight Caracal": "Quiet, artistic, and deeply connected to nature, finding peace in the silence of moonlit snowfields."
+};
+
+const catMBTI = {
+    "The Philosopher Cat": "INFP", // Idealistic, introspective, driven by inner values.
+    "The Lynx": "ESTP", // Action-oriented, thrives on spontaneity and excitement.
+    "The Aurora Cat": "INTP", // Creative, imaginative, and loves exploring new ideas.
+    "The White Witch Cat": "ENFJ", // Charismatic, visionary, guides others with warmth.
+    "The Winter Howler": "ENTP", // Bold, innovative, loves challenges and tackling new experiences.
+    "The Cozy Snowcat": "ISFJ", // Warm, nurturing, loves comfort and tradition.
+    "The Arctic Panther": "INTJ", // Strategic, logical, and goal-focused.
+    "The Wildcat": "ESTP", // Adventurous, enjoys challenges, and thrives in dynamic environments.
+    "The Midnight Caracal": "ISFP" // Quiet, artistic, and attuned to nature.
+};
+
+// Online cat images (for demo purposes)
+const catImages = {
+    "The Philosopher Cat": "Cat images/cat1.png",
+    "The Lynx": "Cat images/cat2.png",
+    "The Aurora Cat": "Cat images/cat3.png",
+    "The White Witch Cat": "Cat images/cat4.png",
+    "The Winter Howler": "Cat images/cat5.png",
+    "The Cozy Snowcat": "Cat images/cat6.png",
+    "The Arctic Panther": "Cat images/cat7.png",
+    "The Wildcat": "Cat images/cat8.png",
+    "The Midnight Caracal": "Cat images/cat9.png"
+};
+
 
 
         // Determine the accompanying cat
@@ -153,11 +163,7 @@ setTimeout(() => {
         }
 
         // Update the social share links
-        const currentUrl = window.location.href;
-        document.getElementById("share-facebook").href = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(currentUrl)}`;
-        document.getElementById("share-instagram").href = `https://www.instagram.com/?url=${encodeURIComponent(currentUrl)}`;
-        document.getElementById("share-messenger").href = `https://www.messenger.com/t?link=${encodeURIComponent(currentUrl)}`;
-
+   
         // Restart the quiz
         function restartQuiz() {
             window.location.href = 'index.html';

@@ -34,12 +34,12 @@
             setTimeout(() => {
                 snowflake.style.transition = 'opacity 2s'; // 2s fade-out duration
                 snowflake.style.opacity = '0'; // Fade out the snowflake
-            }, 5000); // Start fading after 5 seconds
+            }, 6000); // Start fading after 5 seconds
 
             // Remove the snowflake after fade-out completes
             setTimeout(() => {
                 snowflake.remove();
-            }, 7000); // Remove it 7 seconds after creation
+            }, 9000); // Remove it 7 seconds after creation
         }
         // Generate snowflakes at intervals
         setInterval(createSnowflake, 200);
