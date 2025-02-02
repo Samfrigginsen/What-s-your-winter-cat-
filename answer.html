@@ -52,6 +52,17 @@ setTimeout(() => {
             </p>
         </div>
 
+        <style>
+            /* Ensure images are displayed in 244x244 ratio */
+            #cat-image {
+                width: 244px;
+                height: 244px;
+                object-fit: cover; /* Maintains aspect ratio */
+                display: block; /* Centers the image */
+                margin: 0 auto; /* Centers horizontally */
+            }
+        </style>
+
         <h3>Your Accompanying Cat Is...</h3>
         <div id="accompanying-cat-result">
             <img src="https://placekitten.com/400/301" alt="Your Accompanying Cat" id="accompanying-cat-image">
@@ -60,7 +71,16 @@ setTimeout(() => {
                 Your creative and dreamy companion adds a touch of imagination and magic to your cozy winter days!
             </p>
         </div>
-
+        <style>
+            /* Ensure accompanying cat image is displayed in 244x244 ratio */
+            #accompanying-cat-image {
+                width: 244px;
+                height: 244px;
+                object-fit: cover; /* Maintains aspect ratio */
+                display: block; /* Centers the image */
+                margin: 0 auto; /* Centers horizontally */
+            }
+        </style>
         <div id="social-share">
             <h3>Share your result!</h3>
             
