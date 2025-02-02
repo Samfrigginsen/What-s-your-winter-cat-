@@ -139,14 +139,53 @@
         }
 
         // Function to calculate the result and redirect to the results page
-        function calculateResult() {
-            // For simplicity, pick a random Winter Cat result
-            const randomResultIndex = Math.floor(Math.random() * results.length);
-            const selectedCat = results[randomResultIndex];
+        // function calculateResult() {
+        //     // For simplicity, pick a random Winter Cat result
+        //     const randomResultIndex = Math.floor(Math.random() * results.length);
+        //     const selectedCat = results[randomResultIndex];
 
-            // Redirect to the results page with the selected cat in the query parameter
-            window.location.href = `answer.html?cat=${encodeURIComponent(selectedCat)}`;
-        }
+        //     // Redirect to the results page with the selected cat in the query parameter
+        //     window.location.href = `answer.html?cat=${encodeURIComponent(selectedCat)}`;
+        // }
+
+        function calculateResult() {
+    const catScores = {
+        "The Philosopher Cat": 0,
+        "The Lynx": 0,
+        "The Aurora Cat": 0,
+        "The White Witch Cat": 0,
+        "The Winter Howler": 0,
+        "The Cozy Snowcat": 0,
+        "The Arctic Panther": 0,
+        "The Wildcat": 0,
+        "The Midnight Caracal": 0
+    };
+
+    // Mapping answers to specific Winter Cats
+    const answerMapping = [
+        ["The Cozy Snowcat", "The Wildcat", "The Philosopher Cat", "The Lynx"], // Q1
+        ["The Cozy Snowcat", "The Midnight Caracal", "The White Witch Cat", "The Arctic Panther"], // Q2
+        ["The Wildcat", "The Cozy Snowcat", "The Arctic Panther", "The Philosopher Cat"], // Q3
+        ["The Cozy Snowcat", "The Arctic Panther", "The Philosopher Cat", "The Wildcat"], // Q4
+        ["The Cozy Snowcat", "The White Witch Cat", "The Lynx", "The Winter Howler"], // Q5
+        ["The Arctic Panther", "The Philosopher Cat", "The Wildcat", "The Lynx"], // Q6
+        ["The Cozy Snowcat", "The Midnight Caracal", "The Wildcat", "The Arctic Panther"] // Q7
+    ];
+
+    // Calculate scores based on selected answers
+    userAnswers.forEach((answerIndex, questionIndex) => {
+        const selectedCat = answerMapping[questionIndex][answerIndex];
+        catScores[selectedCat]++;
+    });
+
+    // Determine the cat with the highest score
+    let selectedCat = Object.keys(catScores).reduce((a, b) => catScores[a] > catScores[b] ? a : b);
+
+    // Redirect to results page with the selected cat
+    window.location.href = `answer.html?cat=${encodeURIComponent(selectedCat)}`;
+}
+
+
 
         // Initialize the quiz
         renderQuestion(); // Display the first question
