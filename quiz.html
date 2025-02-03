@@ -115,29 +115,40 @@
         }
 
         function calculateResult() {
-            const mbtiScores = { "I": 0, "E": 0, "N": 0, "S": 0, "T": 0, "F": 0, "J": 0, "P": 0 };
-            const mbtiMapping = [
-                ["E", "E", "I", "I"],
-                ["I", "E", "N", "S"],
-                ["E", "I", "T", "J"],
-                ["F", "T", "F", "N"],
-                ["S", "F", "T", "J"],
-                ["J", "P", "E", "N"],
-                ["I", "E", "P", "J"]
-            ];
+    const mbtiScores = { "I": 0, "E": 0, "N": 0, "S": 0, "T": 0, "F": 0, "J": 0, "P": 0 };
+    const mbtiMapping = [
+        ["E", "E", "I", "I"],
+        ["I", "E", "N", "S"],
+        ["E", "I", "T", "J"],
+        ["F", "T", "F", "N"],
+        ["S", "F", "T", "J"],
+        ["J", "P", "E", "N"],
+        ["I", "E", "P", "J"]
+    ];
 
-            userAnswers.forEach((answerIndex, questionIndex) => {
-                mbtiScores[mbtiMapping[questionIndex][answerIndex]]++;
-            });
+    userAnswers.forEach((answerIndex, questionIndex) => {
+        mbtiScores[mbtiMapping[questionIndex][answerIndex]]++;
+    });
 
-            const personalityType = (mbtiScores["I"] > mbtiScores["E"] ? "I" : "E") +
-                                    (mbtiScores["N"] > mbtiScores["S"] ? "N" : "S") +
-                                    (mbtiScores["T"] > mbtiScores["F"] ? "T" : "F") +
-                                    (mbtiScores["J"] > mbtiScores["P"] ? "J" : "P");
+    const personalityType = 
+        (mbtiScores["I"] > mbtiScores["E"] ? "I" : "E") +
+        (mbtiScores["N"] > mbtiScores["S"] ? "N" : "S") +
+        (mbtiScores["T"] > mbtiScores["F"] ? "T" : "F") +
+        (mbtiScores["J"] > mbtiScores["P"] ? "J" : "P");
 
-            const selectedCat = catTypes[personalityType] || "The Lynx";
-            window.location.href = `answer.html?cat=${encodeURIComponent(selectedCat)}`;
-        }
+    console.log("Determined MBTI Type:", personalityType); // Debugging output
+
+    let selectedCat = catTypes[personalityType];
+
+    // If the personalityType is not found, pick a random cat instead of defaulting to The Lynx
+    if (!selectedCat) {
+        const availableCats = Object.values(catTypes);
+        selectedCat = availableCats[Math.floor(Math.random() * availableCats.length)];
+    }
+
+    window.location.href = `answer.html?cat=${encodeURIComponent(selectedCat)}`;
+}
+
 
         renderQuestion();
     </script>
