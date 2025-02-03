@@ -15,47 +15,35 @@
         function createSnowflake() {
             const snowflake = document.createElement('div');
             snowflake.classList.add('snowflake');
-            snowflake.textContent = '❄'; // Snowflake symbol
-            snowflake.style.left = Math.random() * 100 + 'vw'; // Random horizontal position
-            snowflake.style.animationDuration = Math.random() * 7 + 9 + 's'; // Random fall speed
-            snowflake.style.fontSize = Math.random() * 1.5 + 1 + 'rem'; // Random size
-            snowflake.style.opacity = Math.random(); // Random transparency
+            snowflake.textContent = '❄';
+            snowflake.style.left = Math.random() * 100 + 'vw';
+            snowflake.style.animationDuration = Math.random() * 7 + 9 + 's';
+            snowflake.style.fontSize = Math.random() * 1.5 + 1 + 'rem';
+            snowflake.style.opacity = Math.random();
             snowContainer.appendChild(snowflake);
 
-            // Add smooth fade-out effect before removal
             setTimeout(() => {
-                snowflake.style.transition = 'opacity 2s'; // 2s fade-out duration
-                snowflake.style.opacity = '0'; // Fade out the snowflake
-            }, 5000); // Start fading after 5 seconds
+                snowflake.style.transition = 'opacity 2s';
+                snowflake.style.opacity = '0';
+            }, 5000);
 
-            // Remove the snowflake after fade-out completes
             setTimeout(() => {
                 snowflake.remove();
-            }, 7000); // Remove it 7 seconds after creation
+            }, 7000);
         }
 
-        // Generate snowflakes at intervals
         setInterval(createSnowflake, 200);
     </script>
 
     <div id="quiz-container">
         <header>
             <h1>"What's Your Winter Cat?"</h1>
-            <!-- <p>Answer the questions below to find out which Winter Cat matches your personality!</p> -->
         </header>
-
-        <div id="question-container">
-            <!-- Questions will appear dynamically -->
-        </div>
-
-        <!-- <button id="next-button" onclick="nextQuestion()">Next</button> -->
-
+        <div id="question-container"></div>
         <button id="next-button" onclick="nextQuestion()" disabled>Next</button>
-
     </div>
 
     <script>
-        // Quiz Questions and Answers
         const questions = [
             "What’s your favorite winter activity?",
             "What’s your favorite place to be on a snowy day?",
@@ -67,44 +55,39 @@
         ];
 
         const answers = [
-            ["Building snowmen", "Skiing or snowboarding", "Reading indoors", "Exploring snow trails"],
-            ["By the fireplace", "In a bustling café", "On a moonlit walk", "At home with loved ones"],
-            ["Excited and adventurous", "Calm and cozy", "Unbothered and relaxed", "Planning for the aftermath"],
+            ["Building snowmen", "Skiing", "Reading indoors", "Exploring snow trails"],
+            ["By the fireplace", "In a café", "On a moonlit walk", "At home with loved ones"],
+            ["Excited", "Calm and cozy", "Unbothered", "Planning ahead"],
             ["Hot chocolate", "Coffee", "Tea", "Spicy Ginger Tea"],
-            ["Warm soup", "Cookies and cakes", "Pizza", "Hearty stew"],
-            ["Traditional celebrations", "Quiet introspection", "Socializing with friends", "Adventure or travel"],
-            ["Peace and quiet", "Laughter and connection", "Thrills and spontaneity", "Reflection and planning"]
+            ["Warm soup", "Cookies", "Pizza", "Stew"],
+            ["Traditional celebrations", "Quiet introspection", "Socializing", "Adventure"],
+            ["Peace and quiet", "Laughter and connection", "Thrills", "Reflection"]
         ];
 
-        // Winter Cat Results
-        const results = [
-            "The Philosopher Cat",
-            "The Lynx",
-            "The Aurora Cat",
-            "The White Witch cat",
-            "The Winter Howler",
-            "The Cozy Snowcat",
-            "The Arctic Panther",
-            "The Wildcat",
-            "The Midnight Caracal"
-        ];
+        const catTypes = {
+            "INFJ": "The White Witch Cat",
+            "ENFJ": "The Aurora Cat",
+            "ISTJ": "The Arctic Panther",
+            "ISFJ": "The Cozy Snowcat",
+            "INTJ": "The Philosopher Cat",
+            "ESTP": "The Wildcat",
+            "ESFP": "The Midnight Caracal",
+            "ENTP": "The Lynx",
+            "ENTJ": "The Winter Howler"
+        };
 
-        let userAnswers = []; // To store selected answers
+        let userAnswers = [];
         let currentQuestionIndex = 0;
 
         const questionContainer = document.getElementById("question-container");
         const nextButton = document.getElementById("next-button");
 
-        // Function to render the current question
         function renderQuestion() {
-            questionContainer.innerHTML = ""; // Clear previous content
-
-            // Create and add question text
+            questionContainer.innerHTML = "";
             const questionText = document.createElement("h2");
             questionText.textContent = questions[currentQuestionIndex];
             questionContainer.appendChild(questionText);
 
-            // Create and add answer options
             answers[currentQuestionIndex].forEach((answer, index) => {
                 const answerButton = document.createElement("button");
                 answerButton.textContent = answer;
@@ -113,82 +96,50 @@
                 questionContainer.appendChild(answerButton);
             });
 
-            // Reset the Next button for the new question
             nextButton.disabled = true;
-            nextButton.style.cursor = "not-allowed";
         }
 
-        // Function to handle answer selection
         function selectAnswer(selectedIndex) {
-            userAnswers[currentQuestionIndex] = selectedIndex; // Save user's answer
-            nextButton.disabled = false; // Enable the Next button
-            nextButton.style.cursor = "pointer"; // Change cursor to pointer
+            userAnswers[currentQuestionIndex] = selectedIndex;
+            nextButton.disabled = false;
         }
 
-        // Function to show the next question
         function nextQuestion() {
-            if (nextButton.disabled) return; // Do nothing if the button is disabled
-            nextButton.disabled = true; // Disable button after clicking until the next question is answered
-
+            if (nextButton.disabled) return;
             currentQuestionIndex++;
             if (currentQuestionIndex < questions.length) {
-                renderQuestion(); // Render the next question
+                renderQuestion();
             } else {
-                calculateResult(); // All questions answered, calculate the result
+                calculateResult();
             }
         }
 
-        // Function to calculate the result and redirect to the results page
-        // function calculateResult() {
-        //     // For simplicity, pick a random Winter Cat result
-        //     const randomResultIndex = Math.floor(Math.random() * results.length);
-        //     const selectedCat = results[randomResultIndex];
-
-        //     // Redirect to the results page with the selected cat in the query parameter
-        //     window.location.href = `answer.html?cat=${encodeURIComponent(selectedCat)}`;
-        // }
-
         function calculateResult() {
-    const catScores = {
-        "The Philosopher Cat": 0,
-        "The Lynx": 0,
-        "The Aurora Cat": 0,
-        "The White Witch Cat": 0,
-        "The Winter Howler": 0,
-        "The Cozy Snowcat": 0,
-        "The Arctic Panther": 0,
-        "The Wildcat": 0,
-        "The Midnight Caracal": 0
-    };
+            const mbtiScores = { "I": 0, "E": 0, "N": 0, "S": 0, "T": 0, "F": 0, "J": 0, "P": 0 };
+            const mbtiMapping = [
+                ["E", "E", "I", "I"],
+                ["I", "E", "N", "S"],
+                ["E", "I", "T", "J"],
+                ["F", "T", "F", "N"],
+                ["S", "F", "T", "J"],
+                ["J", "P", "E", "N"],
+                ["I", "E", "P", "J"]
+            ];
 
-    // Mapping answers to specific Winter Cats
-    const answerMapping = [
-        ["The Cozy Snowcat", "The Wildcat", "The Philosopher Cat", "The Lynx"], // Q1
-        ["The Cozy Snowcat", "The Midnight Caracal", "The White Witch Cat", "The Arctic Panther"], // Q2
-        ["The Wildcat", "The Cozy Snowcat", "The Arctic Panther", "The Philosopher Cat"], // Q3
-        ["The Cozy Snowcat", "The Arctic Panther", "The Philosopher Cat", "The Wildcat"], // Q4
-        ["The Cozy Snowcat", "The White Witch Cat", "The Lynx", "The Winter Howler"], // Q5
-        ["The Arctic Panther", "The Philosopher Cat", "The Wildcat", "The Lynx"], // Q6
-        ["The Cozy Snowcat", "The Midnight Caracal", "The Wildcat", "The Arctic Panther"] // Q7
-    ];
+            userAnswers.forEach((answerIndex, questionIndex) => {
+                mbtiScores[mbtiMapping[questionIndex][answerIndex]]++;
+            });
 
-    // Calculate scores based on selected answers
-    userAnswers.forEach((answerIndex, questionIndex) => {
-        const selectedCat = answerMapping[questionIndex][answerIndex];
-        catScores[selectedCat]++;
-    });
+            const personalityType = (mbtiScores["I"] > mbtiScores["E"] ? "I" : "E") +
+                                    (mbtiScores["N"] > mbtiScores["S"] ? "N" : "S") +
+                                    (mbtiScores["T"] > mbtiScores["F"] ? "T" : "F") +
+                                    (mbtiScores["J"] > mbtiScores["P"] ? "J" : "P");
 
-    // Determine the cat with the highest score
-    let selectedCat = Object.keys(catScores).reduce((a, b) => catScores[a] > catScores[b] ? a : b);
+            const selectedCat = catTypes[personalityType] || "The Lynx";
+            window.location.href = `answer.html?cat=${encodeURIComponent(selectedCat)}`;
+        }
 
-    // Redirect to results page with the selected cat
-    window.location.href = `answer.html?cat=${encodeURIComponent(selectedCat)}`;
-}
-
-
-
-        // Initialize the quiz
-        renderQuestion(); // Display the first question
+        renderQuestion();
     </script>
 </body>
 </html>
