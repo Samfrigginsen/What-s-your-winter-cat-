@@ -117,20 +117,20 @@
         function calculateResult() {
     const mbtiScores = { "I": 0, "E": 0, "N": 0, "S": 0, "T": 0, "F": 0, "J": 0, "P": 0 };
     const mbtiMapping = [
-        ["E", "E", "I", "I"],
-        ["I", "E", "N", "S"],
-        ["E", "I", "T", "J"],
-        ["F", "T", "F", "N"],
-        ["S", "F", "T", "J"],
-        ["J", "P", "E", "N"],
-        ["I", "E", "P", "J"]
+        ["E", "E", "I", "I"], // Q1 - Social vs. Solo
+        ["I", "E", "N", "S"], // Q2 - Abstract vs. Practical
+        ["T", "F", "J", "P"], // Q3 - Logic vs. Emotion
+        ["N", "S", "T", "F"], // Q4 - Theory vs. Sensory
+        ["N", "S", "T", "F"], // Q5 - Strategy vs. Comfort
+        ["J", "P", "N", "S"], // Q6 - Structured vs. Flexible
+        ["I", "E", "T", "F"]  // Q7 - Reserved vs. Expressive
     ];
 
     userAnswers.forEach((answerIndex, questionIndex) => {
         mbtiScores[mbtiMapping[questionIndex][answerIndex]]++;
     });
 
-    const personalityType = 
+    let personalityType =
         (mbtiScores["I"] > mbtiScores["E"] ? "I" : "E") +
         (mbtiScores["N"] > mbtiScores["S"] ? "N" : "S") +
         (mbtiScores["T"] > mbtiScores["F"] ? "T" : "F") +
@@ -138,16 +138,31 @@
 
     console.log("Determined MBTI Type:", personalityType); // Debugging output
 
-    let selectedCat = catTypes[personalityType];
+    const availableTypes = Object.keys(catTypes);
 
-    // If the personalityType is not found, pick a random cat instead of defaulting to The Lynx
-    if (!selectedCat) {
-        const availableCats = Object.values(catTypes);
-        selectedCat = availableCats[Math.floor(Math.random() * availableCats.length)];
+    if (!catTypes[personalityType]) {
+        // Find the closest MBTI match
+        let bestMatch = availableTypes[0];
+        let bestScore = 0;
+
+        availableTypes.forEach((availableType) => {
+            let similarity = 0;
+            for (let i = 0; i < 4; i++) {
+                if (personalityType[i] === availableType[i]) similarity++;
+            }
+            if (similarity > bestScore) {
+                bestScore = similarity;
+                bestMatch = availableType;
+            }
+        });
+
+        personalityType = bestMatch;
     }
 
+    const selectedCat = catTypes[personalityType];
     window.location.href = `answer.html?cat=${encodeURIComponent(selectedCat)}`;
 }
+
 
 
         renderQuestion();
