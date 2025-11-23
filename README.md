@@ -13,5 +13,5 @@ A fun personality quiz that matches you with a unique "Winter Cat" based on your
 3. Share your result with friends!
 
 ## Credits
-- Artworks created by me (the author of this project). Check out my Instagram art page @samsen_art https://www.instagram.com/samsen_art/
+- Artworks created by me (the author of this project). Check out my Instagram art page @samsen_art https://www.instagram.com/samfrigginsen/
 - Inspired by https://korevillo.github.io/cozycabincafe/
